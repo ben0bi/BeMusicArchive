@@ -1,0 +1,68 @@
+	<h1>ben0bis Music Archive</h1>
+		<div id="buploader"></div>
+		<div id="buttons" style="position:absolute; right: 10px; top: 10px;">
+			<table border="0">
+			<tr>
+			<td><a href="javascript:" class="opButton" onclick="buploader.showMKDIR();">MKDIR</a></td>
+			<td>&nbsp;</td>
+			<td><a href="index.php" class="opButton">LOGOUT</a></td>
+			</tr><tr>
+			<td><a href="javascript:" onclick="enableRenaming()" class="opButton" id="opRename">RENAME</a></td>
+			<td>&nbsp;</td>
+			<td><a href="javascript:" onclick="enableDeletion()" class="opButton" id="opDelete">DELETE</a></td>
+			</tr>
+			</table>
+		</div>
+	<hr />
+	<div id="filelist">Bitte warten..</div>
+<!-- scripts. -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous">
+</script>
+
+<script src="js/ben0biFuncs.js"></script>
+<script src="js/ben0biUploader.js"></script>
+
+<script>
+var buploader = null;
+var g_enabledeletion=0;
+var g_renamefile=0;
+var buploader = 0;
+
+function enableDeletion()
+{
+	g_enabledeletion=!g_enabledeletion;
+	if(g_enabledeletion)
+		$('#opDelete').addClass('opRemove');
+	else
+		$('#opDelete').removeClass('opRemove');
+	buploader.setEnableDeletion(g_enabledeletion);
+	buploader.getFiles();
+}
+
+function enableRenaming()
+{
+	g_renamefile=!g_renamefile;
+	if(g_renamefile)
+		$('#opRename').addClass('opRemove');
+	else
+		$('#opRename').removeClass('opRemove');
+	buploader.setEnableRenaming(g_renamefile);
+	buploader.getFiles();
+}
+
+
+$(document).ready(function()
+{
+	// get enable deletion flag.
+	g_enabledeletion=uGET('enabledeletion');
+
+	// get rename flag.
+	g_renamefile = uGET('renamefile');
+
+	buploader = new BUP('buploader', 'filelist', g_renamefile, g_enabledeletion);
+	buploader.getFiles();
+});
+
+</script>

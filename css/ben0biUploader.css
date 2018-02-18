@@ -1,0 +1,274 @@
+/* right aligned text */
+.rightalign {text-align: right;}
+.topmargin {margin-top: 10px;}
+.centerX	{margin: 0 auto;}
+
+/* size of the UI fields. */
+.fullwidth {width: 100%;max-width: 100%;}
+
+/* the old file name in the rename UI. */
+.overlapSpan
+{
+	position: relative;
+	display: inline-block;
+	height: 22px;
+	/*
+	margin-left: 5px;
+	border: 1px solid #FF0000;
+	*/
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+/* the text of the old file name in the rename UI. */
+.overlapSpanContent
+{
+	position: absolute;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* colouring of an ok button. */
+.okButton
+{
+	border-radius: 4px;
+	padding: 2px 5px;
+	text-align: center;
+	text-decoration: none;
+	background-color: #111133;
+	border: 2px solid #99FF99;
+	color: #99FF99;
+	margin-left: 5px;
+}
+
+.okButton:hover
+{
+	border: 2px solid #00FF00;
+	color: #00FF00;
+	background-color: #111166;
+}
+
+/* colouring of a cancel button. */
+.cancelButton
+{
+	border-radius: 4px;
+	padding: 2px 5px;
+	text-align: center;
+	text-decoration: none;
+	background-color: #111133;
+	border: 2px solid #FF6666;
+	color: #FF6666;
+	margin-left: 5px;
+}
+
+.cancelButton:hover
+{
+	border: 2px solid #FF0000;
+	color: #FF0000;
+	background-color: #111166;
+}
+
+/* colouring of an operation button */
+.opButton
+{
+	font-family: monospace;
+	font-size: 14pt;
+	display: block;
+	width: 100%;
+	border-radius: 4px;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	background-color: #111133;
+	border: 2px solid #9999FF;
+	color: #9999FF;
+	margin-left:0;
+}
+
+.opButton:hover
+{
+	border: 2px solid #00FF00;
+	color: #00FF00;
+	background-color: #111166;
+}
+
+.opRemove
+{
+	text-decoration: line-through;
+	color: #FF6666;
+	border: 2px solid #FF6666;
+}
+
+/* a filename in the file list, including rename and deletion links. */
+.filelist_filename, .filelist_dirname
+{
+	border-bottom: 1px dashed #66AA66;
+}
+
+.filefont {	font-size: 16pt; }
+
+#BUPactualDirectory
+{
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+/* Colouring */
+/* The button to press for selecting a file. */
+.fileSelectorButton 
+{
+    border-color: #AAA;
+    background: #DDD;
+}
+.fileSelectorButton:hover {
+    background: #CCC;
+}
+.fileSelectorButton:active {
+    background: #CCF;
+}
+.fileSelectorButton :invalid + span {
+    color: #A44;
+}
+.fileSelectorButton :valid + span {
+    color: #4A4;
+}
+
+/* File selector button. */
+/* Remove the dialog. */
+label.fileSelectorButton input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
+/* The upload file selector. */
+.fileSelectorButton 
+{
+    border: 2px solid #AAA;
+    border-radius: 4px;
+    padding: 3px 5px;
+	padding-top: 6px;
+	height: 22px;
+    margin: 0 auto;
+    display: block;
+	width: 100%;
+	text-align: center;
+}
+
+/* the text in the file selector button. */
+.fileSelectorButtonText
+{
+	overflow: hidden;
+}
+
+/* The delete file button. */
+.deleteFileButton
+{
+	color: #F33;
+	background-color: transparent;
+	padding: 3px;
+	margin-right: 3px;
+}
+
+.deleteFileButton:hover
+{
+	color: #3399FF;
+	background-color: #F33;
+}
+
+/* the content of the delete file button. usually an X */
+.deleteFileButtonContent:before
+{
+	content: 'X';
+}
+
+/* The rename file button. */
+.renameFileButton
+{
+	background-color: #33AA33;
+	padding: 3px;
+	margin-right: 3px;
+}
+
+.renameFileButton:hover
+{
+	background-color: #3399FF;
+}
+
+/* the content of the delete file button. usually an X */
+.renameFileButtonContent:before
+{
+	content: 'R';
+}
+
+/* The upload submit button. */
+.uploadSubmitButton
+{
+	width: 100%;
+	display: none;
+	margin: 0 auto;
+}
+
+/* the upload process bar. */
+.upload_process
+{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	display: none;
+	margin: 0 auto;
+	border: 2px solid #00AA00;
+	background-color: transparent;
+}
+
+/* the upload process indicator graphic. */
+.inner_upload_process
+{
+	position: absolute;
+	width: 0;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #33FF33;
+}
+
+/* this message will be shown after an upload. */
+.upload_result
+{
+	display: none;
+	position: relative;
+	top: 10px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+/* File size colours. */
+/* <= 1 Mb */
+.greenfile { color: #33AA33;}
+/* <= 1 GB */
+.orangefile { color: #FFAA33;}
+/* > 1 GB */
+.redfile { color: #FF3333;}
+
+.BUP_tdminwidth 
+{
+	width: 1%; 
+	padding: 0px; 
+	margin: 0px;
+}
+
+.BUP_tdsizewidth
+{
+	width: 20%; 
+	padding: 0px; 
+	margin: 0px;
+}
+
+.BUP_tdmaxwidth 
+{
+	width: 70%; 
+	max-width: 70%; 
+	overflow: hidden;
+}

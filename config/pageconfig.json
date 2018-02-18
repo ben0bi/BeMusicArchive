@@ -1,0 +1,12 @@
+{
+	"__comment": "The upload path seen from the server root with slash at the end.",
+	"REAL_UPLOAD_PATH": "/var/www/html/MUSIC/FILESYS/",
+
+	"__comment": "The upload path seen from the pages php directory with slash at the end",
+	"UPLOAD_PATH_FROM_PHPDIR": "../FILESYS/",
+
+	"__comment": "The upload path seen from the pages html directory with slash at the end",
+	"UPLOAD_PATH_FROM_HTMLDIR": "FILESYS/",
+
+	"__comment": ""
+}
