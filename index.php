@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?php
-	// type here the sha1 password string, lowercase.
-	$mypass="60be8d1e414caefe9426e3cb175b22faa3c119ab";
-	//$mypass="e2d09789b0bc36caf4a214c138d95003a90fd444"; // old pass..
+	$configPath = "./config/pageconfig.json";
+	$string = file_get_contents($configPath);
+	$json_a = json_decode($string, true);
+	$mypass=$json_a['PASSWORDSTRING'];
 
 	function showPWField($wrongpass)
 	{
