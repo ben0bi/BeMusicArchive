@@ -1,6 +1,6 @@
 {
 	"__comment": "The SHA1 password string for your password.",
-	"PASSWORDSTRING": "your password as sha1 string",
+	"PASSWORDSTRING": "Your password as sha1 string.",
 
 	"__comment": "The upload path seen from the server root with slash at the end.",
 	"REAL_UPLOAD_PATH": "/var/www/html/FILESYS/",
