@@ -1,4 +1,4 @@
 FILESYS/*
+dummyconfig.json
+config/oldconfig.json
 !FILESYS/empty.empty
-!dummyconfig.json
-!config/oldconfig.json
