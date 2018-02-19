@@ -52,7 +52,6 @@ function enableRenaming()
 	buploader.getFiles();
 }
 
-
 $(document).ready(function()
 {
 	// get enable deletion flag.
