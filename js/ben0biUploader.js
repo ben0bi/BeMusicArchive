@@ -15,7 +15,7 @@
 
 	v2 - with directories.
 */
-var g_version = "v2.3";
+var g_version = "v2.4";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,7 +117,7 @@ var BUP = function(uploaderDivId, fileListDivId, enablerenaming, enabledeletion,
 							result+='</td>';
 						}
 
-						result+='<td class="BUP_tdmaxwidth filelist_dirname filefont" colspan="2"><nobr>&#128193;&nbsp;<a href="javascript:" class="button_changedir_reconfig" data-dirname="'+dir+'">'+dir+'/</a></nobr></td>';
+						result+='<td class="BUP_tdmaxwidth filelist_dirname filefont" colspan="2"><nobr>&#128193;&nbsp;<a href="javascript:" class="button_changeDir_reconfig" data-dirname="'+dir+'">'+dir+'/</a></nobr></td>';
 						result+='</tr>';
 						isNotEmpty++;
 					}
@@ -203,7 +203,6 @@ var BUP = function(uploaderDivId, fileListDivId, enablerenaming, enabledeletion,
 						var isdir=$(this).data('isdir');
 						initiateRename(isdir, filename, filedir);
 					});
-
 					afterProcess();
 				}
 			});
