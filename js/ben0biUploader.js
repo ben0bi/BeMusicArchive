@@ -15,7 +15,7 @@
 
 	v2 - with directories.
 */
-var g_version = "v2.4";
+var g_version = "v2.6";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,11 +35,11 @@ var BUP = function(uploaderDivId, fileListDivId, enablerenaming, enabledeletion,
 
 	this.setEnableDeletion=function(enable) {if(enable) m_enableDeletionOfFiles=1; else m_enableDeletionOfFiles=0;};
 	this.setEnableRenaming=function(enable) {if(enable) m_enableRenamingOfFiles=1; else m_enableRenamingOfFiles=0;};
-	
+
 	// set the flags first.
 	this.setEnableDeletion(enabledeletion);
 	this.setEnableRenaming(enablerenaming);
-	
+
 	// handle progress of uploading.
 	var m_uploadprogressbar=null;
 	var m_uploadprogressborder= null;
@@ -49,7 +49,13 @@ var BUP = function(uploaderDivId, fileListDivId, enablerenaming, enabledeletion,
 	if(afterProcessFunc)
 		m_afterProcessFunction=afterProcessFunc;
 
-	this.getFiles = function(dir = '') {getFiles_intern(dir);};
+	this.getFiles = function(dir = '')
+	{
+		// maybe set actual dir.
+		if(dir == '?dir?')
+			dir = m_actualdir;
+		getFiles_intern(dir);
+	};
 
 	// get the files in a directory and show their names.
 	var getFiles_intern = function(actdir = '')
@@ -384,8 +390,8 @@ var BUP = function(uploaderDivId, fileListDivId, enablerenaming, enabledeletion,
 	var afterUpload=function()
 	{
 		clearFileInput();
-		$('#'+m_upDivId+'_upload_result').show();
 		getFiles_intern(m_actualdir);
+		$('#'+m_upDivId+'_upload_result').show();
 	}
 
 	// upload a file to the upload directory.

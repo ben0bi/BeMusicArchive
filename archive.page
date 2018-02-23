@@ -38,7 +38,7 @@ function enableDeletion()
 	else
 		$('#opDelete').removeClass('opRemove');
 	buploader.setEnableDeletion(g_enabledeletion);
-	buploader.getFiles();
+	buploader.getFiles('?dir?');
 }
 
 function enableRenaming()
@@ -49,7 +49,7 @@ function enableRenaming()
 	else
 		$('#opRename').removeClass('opRemove');
 	buploader.setEnableRenaming(g_renamefile);
-	buploader.getFiles();
+	buploader.getFiles('?dir?');
 }
 
 $(document).ready(function()
