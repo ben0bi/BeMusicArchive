@@ -256,7 +256,5 @@ switch($what)
 	case "list": BUP::filelist(); break;
 	case "upload": BUP::uploadfile(); break;
 	case "rename": BUP::renamefile(); break;
-	default: echo("Interpreter: Command not found."); break;
+	default: echo("Interpreter: Command not found. [$what]"); break;
 }
-
-?>
