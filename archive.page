@@ -20,6 +20,8 @@
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous">
 </script>
+<!-- used for getting the image of the mp3 -->
+<script src="js/id3-minimized.js"></script>
 
 <script src="js/ben0biFuncs.js"></script>
 <script src="js/ben0biUploader.js"></script>

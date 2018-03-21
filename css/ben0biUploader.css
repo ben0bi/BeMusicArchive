@@ -272,3 +272,24 @@ label.fileSelectorButton input[type="file"] {
 	max-width: 70%; 
 	overflow: hidden;
 }
+
+/* Cover image for mp3 files. */
+.coverImage
+{
+	max-width: 64px;
+	max-height: 64px;
+}
+
+.albumName
+{
+	font-size: 10pt;
+	margin: 0;
+	padding: 0;
+}
+.artistName
+{
+	font-size: 8pt;
+	margin: 0;
+	padding: 0;
+	margin-top: -10px;
+}

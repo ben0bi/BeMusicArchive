@@ -71,148 +71,204 @@ var BUP = function(uploaderDivId, fileListDivId, enablerenaming, enabledeletion,
 			dataType: 'text',
 			data: {command: 'list', actualdir: actdir},
 			success: function (data)
-				{
-					var json = JSON.parse(data);
+			{
+				var json = JSON.parse(data);
 				// TODO: remove rootDir
-					var rootDir=json['directory'];
-					//var relDir=json['reldir'];
-					m_actualdir=json['actualdir'];
-					var adir = m_actualdir;
-					if(adir.length>0)
-						adir+="/";
-					console.log("Actual directory: "+m_actualdir);
+				var rootDir=json['directory'];
+				//var relDir=json['reldir'];
+				m_actualdir=json['actualdir'];
+				var adir = m_actualdir;
+				if(adir.length>0)
+					adir+="/";
+				console.log("Actual directory: "+m_actualdir);
 				// show actual directory
-					var result = "<span id='BUPactualDirectory'>Actual dir: /"+adir+"</span><br />";	
+				var result = "<span id='BUPactualDirectory'>Actual dir: /"+adir+"</span><br />";	
 				// show sub directories
-					result += '<table border="0" style="width: 100%;">';
-					// first show back directory.
+				result += '<table border="0" style="width: 100%;">';
+				// first show back directory.
+				if(m_actualdir.length>0)
+				{
+					result+='<tr style="max-width: 100%" class="filelist_dirname filefont">';
+					result+='<td class="BUP_tdminwidth">&#128072;&nbsp;</td>';
+					result+='<td class="BUP_tdmaxwidth filelist_dirname filefont" colspan="2">';
+					result+='<a href="javascript:" class="button_goback_reconfig">../</a></td>';
+					result+='</tr>';
+				}
+
+				// show the directories.
+				for(var i=0;i<json['dirs'].length;i++)
+				{
+					var dir = json['dirs'][i];
+					var deletedir = dir;
 					if(m_actualdir.length>0)
+						deletedir = m_actualdir+'/'+dir;
+
+					result+='<tr style="max-width: 100%" class="filelist_dirname filefont">';
+
+					// show delete link for dir.
+					if(m_enableDeletionOfFiles>0)
 					{
-						result+='<tr style="max-width: 100%" class="filelist_dirname filefont">';
-						result+='<td class="BUP_tdmaxwidth filelist_dirname filefont" colspan="2"><nobr>&#128072;&nbsp;<a href="javascript:" class="button_goback_reconfig">../</a></nobr></td>';
-						result+='</tr>';
+						result+='<td class="BUP_tdminwidth filelist_dirname filefont">';
+						// its deleteFILEbutton because of the looks, not a special deleteDIRbutton.
+						result+='<a href="javascript:" data-dirname="'+deletedir+'" class="deleteFileButton button_initiateDeleteDir_reconfig"><span class="deleteFileButtonContent"></span></a>';
+						result+='</td>';
 					}
 
-					// show the directories.
-					for(var i=0;i<json['dirs'].length;i++)
+					// show rename link for dir.
+					if(m_enableRenamingOfFiles>0)
 					{
-						var dir = json['dirs'][i];
-						var deletedir = dir;
-						if(m_actualdir.length>0)
-							deletedir = m_actualdir+'/'+dir;
-
-						result+='<tr style="max-width: 100%" class="filelist_dirname filefont">';
-
-						// show delete link for dir.
-						if(m_enableDeletionOfFiles>0)
-						{
-							result+='<td class="BUP_tdminwidth filelist_dirname filefont">';
-							// its deleteFILEbutton because of the looks, not a special deleteDIRbutton.
-							result+='<a href="javascript:" data-dirname="'+deletedir+'" class="deleteFileButton button_initiateDeleteDir_reconfig"><span class="deleteFileButtonContent"></span></a>';
-							result+='</td>';
-						}
-
-						// show rename link for dir.
-						if(m_enableRenamingOfFiles>0)
-						{
-							var fndir = '';
-							if(m_actualdir!='')
-								fndir=m_actualdir+"/";
-							result+='<td class="BUP_tdminwidth filelist_filename filefont">';
-							result+='<a href="javascript:" data-isdir="1" data-filename="'+dir+'" data-filedir="'+fndir+'" class="renameFileButton button_initiateRename_reconfig"><span class="renameFileButtonContent"></span></a>';
-							result+='</td>';
-						}
-
-						result+='<td class="BUP_tdmaxwidth filelist_dirname filefont" colspan="2"><nobr>&#128193;&nbsp;<a href="javascript:" class="button_changeDir_reconfig" data-dirname="'+dir+'">'+dir+'/</a></nobr></td>';
-						result+='</tr>';
-						isNotEmpty++;
-					}
-
-				// show files
-					for(var i=0;i<json['files'].length;i++)
-					{
-						var fn = json['files'][i]['Filename'];
 						var fndir = '';
 						if(m_actualdir!='')
 							fndir=m_actualdir+"/";
-						var fs = json['files'][i]['Filesize'];
-						var fsd = json['files'][i]['FilesizeDeterminant'];
-						var fsc = 'greenfile';
-						if(fsd=='Mb' && fs >= 100)
-							fsc='orangefile';
-						if(fsd=='GB')
-							fsc='redfile';
-
-						result+='<tr style="max-width: 100%" class="filelist_filename filefont">';
-						// show delete link for file.
-						if(m_enableDeletionOfFiles>0)
-						{
-							result+='<td class="BUP_tdminwidth filelist_filename filefont">';
-							result+='<a href="javascript:" data-filename="'+fn+'" data-filedir="'+fndir+'" class="deleteFileButton button_initiateDeleteFile_reconfig"><span class="deleteFileButtonContent"></span></a>';
-							result+='</td>';
-						}
-						// show rename link for file.
-						if(m_enableRenamingOfFiles>0)
-						{
-							result+='<td class="BUP_tdminwidth filelist_filename filefont">';
-							result+='<a href="javascript:" data-isdir="0" data-filename="'+fn+'" data-filedir="'+fndir+'" class="renameFileButton button_initiateRename_reconfig"><span class="renameFileButtonContent"></span></a>';
-							result+='</td>';
-						}
-						result+='<td class="BUP_tdmaxwidth filelist_filename filefont"><nobr>&#128441;&nbsp;<a href="'+rootDir+fndir+fn+'" target="_new">'+fn+'</a></nobr></td>';
-						result+='<td class="BUP_tdminwidth filelist_filename filefont '+fsc+'">'+fs+fsd+'</td>';
-						result+='</tr>';
-						isNotEmpty++;
+						result+='<td class="BUP_tdminwidth filelist_filename filefont">';
+						result+='<a href="javascript:" data-isdir="1" data-filename="'+dir+'" data-filedir="'+fndir+'" class="renameFileButton button_initiateRename_reconfig"><span class="renameFileButtonContent"></span></a>';
+						result+='</td>';
 					}
-					result+='</table>';
 
-					// directory is empty.
-					if(isNotEmpty<=0)
-						result+='<div class="filefont">[Directory is empty.]</div>';
-
-					fileDisplay.html(result);
-
-					/* reconfigure the buttons. */
-					// change a directory (forward)
-					$('.button_changeDir_reconfig').click(function()
-					{
-						var dirname = $(this).data('dirname');
-						if(m_actualdir.length>0)
-							dirname=m_actualdir+"/"+dirname;
-						m_actualdir = dirname;
-						getFiles_intern(dirname);
-					});
-					// change a directory (backward)
-					$('.button_goback_reconfig').click(function()
-					{
-						goBackOneDir_intern();
-					});
-
-					// delete a file.
-					$('.button_initiateDeleteFile_reconfig').click(function()
-					{
-						var filename = $(this).data('filename');
-						var filedir = $(this).data('filedir');
-						initiateDeleteFile(filename, filedir);
-					});
-					// delete a directory.
-					$('.button_initiateDeleteDir_reconfig').click(function()
-					{
-						var dir = $(this).data('dirname');
-						initiateDeleteFile(-1337, dir);
-					});
-
-					// rename a file or directory.
-					$('.button_initiateRename_reconfig').click(function()
-					{
-						var filename = $(this).data('filename');
-						var filedir = $(this).data('filedir');
-						var isdir=$(this).data('isdir');
-						initiateRename(isdir, filename, filedir);
-					});
-					afterProcess();
+					result+='<td class="BUP_tdminwidth">&#128193;&nbsp;</td>';
+					result+='<td class="BUP_tdmaxwidth filelist_dirname filefont" colspan="2">';
+					result+='<a href="javascript:" class="button_changeDir_reconfig" data-dirname="'+dir+'">'+dir+'/</a></td>';
+					result+='</tr>';
+					isNotEmpty++;
 				}
-			});
+
+				// show files
+				for(var i=0;i<json['files'].length;i++)
+				{
+					var fn = json['files'][i]['Filename'];
+					var fndir = '';
+					if(m_actualdir!='')
+						fndir=m_actualdir+"/";
+					var fs = json['files'][i]['Filesize'];
+					var fsd = json['files'][i]['FilesizeDeterminant'];
+					var fsc = 'greenfile';
+					if(fsd=='Mb' && fs >= 100)
+						fsc='orangefile';
+					if(fsd=='GB')
+						fsc='redfile';
+
+					result+='<tr style="max-width: 100%" class="filelist_filename filefont">';
+					// show delete link for file.
+					if(m_enableDeletionOfFiles>0)
+					{
+						result+='<td class="BUP_tdminwidth filelist_filename filefont">';
+						result+='<a href="javascript:" data-filename="'+fn+'" data-filedir="'+fndir+'" class="deleteFileButton button_initiateDeleteFile_reconfig"><span class="deleteFileButtonContent"></span></a>';
+						result+='</td>';
+					}
+					// show rename link for file.
+					if(m_enableRenamingOfFiles>0)
+					{
+						result+='<td class="BUP_tdminwidth filelist_filename filefont">';
+						result+='<a href="javascript:" data-isdir="0" data-filename="'+fn+'" data-filedir="'+fndir+'" class="renameFileButton button_initiateRename_reconfig"><span class="renameFileButtonContent"></span></a>';
+						result+='</td>';
+					}
+	
+					// NEW: Load the tags.						    //sample.mp3 sits on your domain
+					(function(rDir,fDir,fname){
+						console.log("Trying to load tags for "+fn+"..");
+						ID3.loadTags(rDir+fDir+fname, function() 
+						{
+							showTags(rDir+fDir+fname,fname);
+						}, {
+							tags: ["title","artist","album","picture"]
+						});
+					})(rootDir,fndir,fn);
+					// ENDOF NEW
+	
+					result+='<td class="BUP_tdminwidth"><span id="fileIcon_'+fn+'"></span>&nbsp;</td>';
+					result+='<td class="BUP_tdmaxwidth filelist_filename filefont" valign="top">';
+					result+='<a href="'+rootDir+fndir+fn+'" target="_new">';
+					result+='<span id="txt_'+fn+'">'+fn+'</span>';
+					result+='</a></nobr></td>';
+					result+='<td class="BUP_tdminwidth filelist_filename filefont '+fsc+'">'+fs+fsd+'</td>';
+					result+='</tr>';
+					isNotEmpty++;
+				}
+				result+='</table>';
+
+				// directory is empty.
+				if(isNotEmpty<=0)
+					result+='<div class="filefont">[Directory is empty.]</div>';
+
+				fileDisplay.html(result);
+
+				/* reconfigure the buttons. */
+				// change a directory (forward)
+				$('.button_changeDir_reconfig').click(function()
+				{
+					var dirname = $(this).data('dirname');
+					if(m_actualdir.length>0)
+						dirname=m_actualdir+"/"+dirname;
+					m_actualdir = dirname;
+					getFiles_intern(dirname);
+				});
+				// change a directory (backward)
+				$('.button_goback_reconfig').click(function()
+				{
+					goBackOneDir_intern();
+				});
+
+				// delete a file.
+				$('.button_initiateDeleteFile_reconfig').click(function()
+				{
+					var filename = $(this).data('filename');
+					var filedir = $(this).data('filedir');
+					initiateDeleteFile(filename, filedir);
+				});
+				// delete a directory.
+				$('.button_initiateDeleteDir_reconfig').click(function()
+				{
+					var dir = $(this).data('dirname');
+					initiateDeleteFile(-1337, dir);
+				});
+
+				// rename a file or directory.
+				$('.button_initiateRename_reconfig').click(function()
+				{
+					var filename = $(this).data('filename');
+					var filedir = $(this).data('filedir');
+					var isdir=$(this).data('isdir');
+					initiateRename(isdir, filename, filedir);
+				});
+				afterProcess();
+			}
+		});
 	}
+	
+	// show mp3 tags
+   /**
+     * Generic function to get the tags after they have been loaded.
+     */
+    function showTags(url, filename) {
+      var tags = ID3.getAllTags(url);
+      var img="&#128441;";
+	  var txt=filename+'<br />';
+	  if(tags.album)
+		  txt=txt+'<span class="albumName">Album: '+tags.album+'</span>';
+	  if(tags.artist)
+		  txt=txt+'&nbsp;<span class="artistName">by '+tags.artist+'</span>';
+      //document.getElementById('title').textContent = tags.title || "";
+      //document.getElementById('artist').textContent = tags.artist || "";
+      //document.getElementById('album').textContent = tags.album || "";
+      var image = tags.picture;
+      if (image) 
+	  {
+		  if(image.data.length>0)
+		  {
+			var base64String = "";
+			for (var i = 0; i < image.data.length; i++) {
+				base64String += String.fromCharCode(image.data[i]);
+			}
+			var base64 = "data:" + image.format + ";base64," +
+                window.btoa(base64String);
+		
+			img='<img class="coverImage" src="'+base64+'" />';
+			//document.getElementById('img_'+filename).setAttribute('src',base64);  
+		  }
+      }
+	  document.getElementById('fileIcon_'+filename).innerHTML=img;
+	  document.getElementById('txt_'+filename).innerHTML=txt;
+    }	
 
 	// goes back one directory if it is not in the root directory.
 	var goBackOneDir_intern = function()
