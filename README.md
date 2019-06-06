@@ -9,7 +9,7 @@ Also shows the cover images from mp3-files.
 Just put it somewhere on your server where the browser can reach.
 
 Uncomment the commented two lines in index.php to see the
-Password-Hash when you input "your" new password.
+password-hash when you input "your" new password.
 Then comment it again and change the password
 and the file directories in config/pageconfig.json
 
