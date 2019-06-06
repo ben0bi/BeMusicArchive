@@ -1,9 +1,9 @@
 {
 	"__comment": "The SHA1 password string for your password.",
-	"PASSWORDSTRING": "Your password as sha1 string.",
+	"PASSWORDSTRING": "60be8d1e414caefe9426e3cb175b22faa3c119ab",
 
 	"__comment": "The upload path seen from the server root with slash at the end.",
-	"REAL_UPLOAD_PATH": "/var/www/html/FILESYS/",
+	"REAL_UPLOAD_PATH": "/var/www/html/MUSIC/FILESYS/",
 
 	"__comment": "The upload path seen from the pages php directory with slash at the end",
 	"UPLOAD_PATH_FROM_PHPDIR": "../FILESYS/",

@@ -8,8 +8,8 @@
 	function showPWField($wrongpass)
 	{
 		// SHOW sha1 of password. Uncomment after you set it.
-		//if(isset($_POST['pass']))
-		//	echo(sha1($_POST['pass']));
+//		if(isset($_POST['pass']))
+//			echo(sha1($_POST['pass']));
 
 		$url = "index.php";
 		// carry on the get parameters.
@@ -26,7 +26,7 @@
 			if($flags>=1)
 				$url.='&';
 			$url.='renamefile';
-		}		
+		}
 		$txt='<div style="display: table; position: absolute; width: 100%; height: 100%;">';
 		$txt.='<div style="display: table-cell; vertical-align: middle;">';
 		$txt.='<div id="pwfield"><form action="'.$url.'" method="POST">';
@@ -40,7 +40,7 @@
 		$txt.='<div style="position:absolute; width: 100%; bottom: 5px; text-align: center; font-family: sans-serif; font-size: 10pt;">'; // hardcoded copyright. Deletion not allowed. 
 		$txt.='by ben0bi in 2017 & 2018 | <a href="http://ben0bi.dlinkddns.com">ben0bi.dlinkddns.com</a>'; // hardcoded copyright. Deletion not allowed. 
 		$txt.='</div>';
-				
+
 		echo($txt);
 	}
 
@@ -68,9 +68,9 @@
 		<style>
 			html, body {padding: 0; margin: 0; width: 100%; height: 100%;}
 			#buploader {width: 300px;}
-			#pwfield 
+			#pwfield
 			{
-				margin: 0 auto; width: 300px; 
+				margin: 0 auto; width: 300px;
 				text-align: center;
 				font-family: monospace;
 				font-size: 14;
